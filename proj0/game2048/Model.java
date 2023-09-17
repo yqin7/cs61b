@@ -113,13 +113,34 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-
+        for (int col_number = 0; col_number < board.size(); col_number = col_number + 1){
+            for (int row_number = 0; row_number < board.size(); row_number = row_number + 1) {
+                Tile t = board.tile(col_number, row_number);
+                if (board.tile(col_number, row_number) != null) {
+                    if (col_empty(col_number, row_number, board, t) == true) {
+                        board.move(col_number, 3, t);
+                        changed = true;
+                        score = score + t.value();
+                    }
+                }
+            }
+        }
         checkGameOver();
         if (changed) {
             setChanged();
         }
         return changed;
     }
+    public boolean col_empty(int col_number,int row_number, Board board, Tile tile) {
+        for (int row_number_test = 3; row_number_test > row_number; row_number_test = row_number_test - 1){
+            if (board.tile(col_number, row_number_test) != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
@@ -137,17 +158,35 @@ public class Model extends Observable {
      *  Empty spaces are stored as null.
      * */
     public static boolean emptySpaceExists(Board b) {
-        // TODO: Fill in this function.
+        // TODO: Fill in this function. Row number from bottom to top, col from left to right
+//         System.out.println(b.tile(0, 1));
+//         System.out.println(b.size());
+        for (int row_number = 0; row_number < b.size(); row_number = row_number + 1) {
+            for (int col_number = 0; col_number < b.size(); col_number = col_number + 1) {
+                if (b.tile(col_number, row_number) == null) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
-
     /**
      * Returns true if any tile is equal to the maximum valid value.
      * Maximum valid value is given by MAX_PIECE. Note that
      * given a Tile object t, we get its value with t.value().
      */
     public static boolean maxTileExists(Board b) {
-        // TODO: Fill in this function.
+        // TODO: Fill in this function. b.tile(3, 0).value() is a number
+
+        for (int row_number = 0; row_number < b.size(); row_number = row_number + 1) {
+            for (int col_number = 0; col_number < b.size(); col_number = col_number + 1) {
+                if (b.tile(col_number, row_number) != null) {
+                    if (b.tile(col_number, row_number).value() == Model.MAX_PIECE) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -159,6 +198,27 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        for (int row_number = 0; row_number < b.size(); row_number = row_number + 1) {
+            for (int col_number = 0; col_number < b.size(); col_number = col_number + 1) {
+                if (b.tile(col_number, row_number) == null) {
+                    return true;
+                }
+            }
+        }
+        for (int row_number = 0; row_number < b.size() ; row_number = row_number + 1) {
+            for (int col_number = 0; col_number < b.size() - 1 ; col_number = col_number + 1) {
+                if (b.tile(col_number, row_number).value() == b.tile(col_number + 1, row_number).value()){
+                    return true;
+                }
+            }
+        }
+        for (int col_number = 0; col_number < b.size(); col_number = col_number + 1) {
+            for (int row_number = 0; row_number < b.size() - 1; row_number = row_number + 1) {
+                if (b.tile(col_number, row_number).value() == b.tile(col_number, row_number + 1).value()){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
