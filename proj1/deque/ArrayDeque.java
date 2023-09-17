@@ -22,7 +22,7 @@ public class ArrayDeque<T> {
         items[next_first] = item;
         size = size + 1;
         if (next_first == 0) {
-            next_last = items.length - 1;
+            next_first = items.length - 1;
         } else {
             next_first = next_first - 1;
         }
@@ -80,38 +80,51 @@ public class ArrayDeque<T> {
 
     /** Returns the item from the front of the list. */
     private T getFirst() {
-        return items[next_first + 1];
+        int first_index = first_index_calculate();
+        return items[first_index];
     }
 
     /** Deletes item from front of the list and
      * returns deleted item. */
     public T removeFirst() {
         T x = getFirst();
-        items[next_first + 1] = null;
+        int first_index = first_index_calculate();
+        items[first_index] = null;
         size = size - 1;
         return x;
     }
 
     /** Returns the item from the back of the list. */
     private T getLast() {
-        return items[next_last - 1];
+        int last_index = last_index_calculate();
+        return items[last_index];
     }
 
     /** Deletes item from back of the list and
      * returns deleted item. */
     public T removeLast() {
         T x = getLast();
-        items[next_last - 1] = null;
+        int last_index = last_index_calculate();
+        items[last_index] = null;
         size = size - 1;
         return x;
     }
     
-    /** Returns the first index if next_first equal to items' length - 1, first index should be zero. */
+    /** Returns the first index. If next_first equal to items' length - 1, first index should be zero. */
     private int first_index_calculate() {
         if (next_first == items.length - 1) {
             return 0;
         } else {
             return next_first + 1;
+        }
+    }
+
+    /** Returns the last index. If next_last equal 0, last index should be items' length - 1. */
+    private int last_index_calculate() {
+        if (next_last == 0) {
+            return items.length - 1;
+        } else {
+            return next_last - 1;
         }
     }
 
