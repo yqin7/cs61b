@@ -142,7 +142,7 @@ public class ArrayDeque<T> {
             return null;
         } else {
             int first_index = first_index_calculate();
-            if (first_index + i <= size) {
+            if (first_index + i <= items.length) {
                 return items[first_index + i];
             } else {
                 return items[first_index + i - items.length];

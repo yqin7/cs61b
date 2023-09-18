@@ -1,6 +1,8 @@
 package deque;
 
 import static org.junit.Assert.assertEquals;
+
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -61,5 +63,57 @@ public class ArrayDequeTest {
         assertEquals(ANobug.get(5).longValue(), 5);
     }
 
+
+    @Test
+    public void random_test() {
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+
+        int N = 50;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 4);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 100);
+                L.addLast(randVal);
+                System.out.println("addLast(" + randVal + ")");
+            }
+//            else if (operationNumber == 1 && L.size() > 0) {
+//                // size
+//                int Last = L.removeLast();
+//                System.out.println("removeLast(" + Last + ")");
+//            }
+            else if (operationNumber == 1 && L.size() > 0) {
+                int Last = L.getLast();
+                System.out.println("getLast(" + Last + ")");
+
+            }
+            else if (operationNumber == 2) {
+                int randVal = StdRandom.uniform(0, 100);
+                L.addFirst(randVal);
+                System.out.println("addFirst(" + randVal + ")");
+            }
+//            else if (operationNumber == 4 && L.size() > 0) {
+//                // size
+//                int First = L.removeFirst();
+//                System.out.println("removeFirst(" + First + ")");
+//            }
+            else if (operationNumber == 3 && L.size() > 0) {
+                int First = L.getFirst();
+                System.out.println("getFirst(" + First + ")");
+            }
+        }
+
+        L.printDeque();
+        System.out.println(L.getFirst());
+        System.out.println(L.getLast());
+
+
+        int randVal = StdRandom.uniform(0, 15);
+        System.out.println("randVal is " + randVal);
+        System.out.println(L.get(randVal));
+
+
+    }
 }
+
 
