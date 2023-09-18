@@ -108,11 +108,29 @@ public class ArrayDequeTest {
         System.out.println(L.getLast());
 
 
-        int randVal = StdRandom.uniform(0, 15);
-        System.out.println("randVal is " + randVal);
+        int randVal = StdRandom.uniform(0, 60);
+        System.out.println("randVal 0 is " + randVal);
         System.out.println(L.get(randVal));
 
+        int randVal1 = StdRandom.uniform(0, 60);
+        System.out.println("randVal 1 is " + randVal1);
+        System.out.println(L.get(randVal1));
 
+        int randVal2 = StdRandom.uniform(0, 60);
+        System.out.println("randVal 2 is " + randVal2);
+        System.out.println(L.get(randVal2));
+
+        int randVal3 = StdRandom.uniform(0, 60);
+        System.out.println("randVal 3 is " + randVal3);
+        System.out.println(L.get(randVal3));
+
+        int randVal4 = StdRandom.uniform(0, 60);
+        System.out.println("randVal 4 is " + randVal4);
+        System.out.println(L.get(randVal4));
+
+        int randVal5 = StdRandom.uniform(0, 60);
+        System.out.println("randVal 5 is " + randVal5);
+        System.out.println(L.get(randVal5));
     }
 }
 
