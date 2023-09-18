@@ -43,7 +43,7 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             resize(size * 2);
         }
-        items[size] = x;
+        items[next_last] = x;
         size = size + 1;
         if (next_last == items.length - 1) {
             next_last = 0;
@@ -79,7 +79,7 @@ public class ArrayDeque<T> {
     }
 
     /** Returns the item from the front of the list. */
-    private T getFirst() {
+    public T getFirst() {
         int first_index = first_index_calculate();
         return items[first_index];
     }
@@ -87,15 +87,19 @@ public class ArrayDeque<T> {
     /** Deletes item from front of the list and
      * returns deleted item. */
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         T x = getFirst();
         int first_index = first_index_calculate();
+        next_first = first_index;
         items[first_index] = null;
         size = size - 1;
         return x;
     }
 
     /** Returns the item from the back of the list. */
-    private T getLast() {
+    public T getLast() {
         int last_index = last_index_calculate();
         return items[last_index];
     }
@@ -103,8 +107,12 @@ public class ArrayDeque<T> {
     /** Deletes item from back of the list and
      * returns deleted item. */
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         T x = getLast();
         int last_index = last_index_calculate();
+        next_last = last_index;
         items[last_index] = null;
         size = size - 1;
         return x;
