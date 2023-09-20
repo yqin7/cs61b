@@ -28,7 +28,7 @@ public class TimeAList {
         AList<Double> times = new AList<>();
         AList<Integer> opCounts = new AList<>();
         int temp = 1000;
-        while (temp <= 10000000) {
+        while (temp <= 128000) {
             Ns.addLast(temp);
             opCounts.addLast(temp);
             temp = temp * 2;
