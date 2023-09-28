@@ -171,7 +171,7 @@ public class ArrayDeque<T> implements Deque<T>{
         private int pos;
         private int count_pos;
         public ArrayIterator() {
-            pos = first_index_calculate()   ;
+            pos = first_index_calculate();
             count_pos = 0;
         }
         @Override

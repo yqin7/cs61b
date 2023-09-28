@@ -1,6 +1,9 @@
 package deque;
 
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 
@@ -177,4 +180,32 @@ public class LinkedListDequeTest {
         /* Null Test. */
         assertEquals(ANobug.equals(null),false);
     }
+
+    @Test
+    public void iter_test(){
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        for (int i = 0; i < 50; i++) {
+            lld1.addLast(i);
+        }
+        lld1.printDeque();
+        Iterator<Integer> aseer = lld1.iterator();
+        while (aseer.hasNext()) {
+            int j = aseer.next();
+            System.out.println(j);
+        }
+    }
+
+    @Test
+    public void getrecursive_test() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        for (int i = 0; i < 50; i++) {
+            lld1.addLast(i);
+        }
+
+        assertEquals(0, lld1.getRecursive(0).longValue());
+        assertEquals(1, lld1.getRecursive(1).longValue());
+        assertEquals(37, lld1.getRecursive(37).longValue());
+    }
+
 }
+
