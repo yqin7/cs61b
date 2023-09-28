@@ -1,6 +1,8 @@
 package deque;
 
-public class ArrayDeque<T> {
+import net.sf.saxon.functions.ConstantFunction;
+
+public class ArrayDeque<T> implements Deque<T>{
     private T[] items;
     private int size;
     private int next_first;
@@ -15,6 +17,7 @@ public class ArrayDeque<T> {
     }
 
     /** Inserts X into the front of the list. */
+    @Override
     public void addFirst(T item) {
         if (size == items.length) {
             resize(size * 2);
@@ -39,6 +42,7 @@ public class ArrayDeque<T> {
     }
 
     /** Inserts X into the back of the list. */
+    @Override
     public void addLast(T x) {
         if (size == items.length) {
             resize(size * 2);
@@ -52,6 +56,8 @@ public class ArrayDeque<T> {
         }
     }
 
+    /** Return if array is empty or not. */
+    @Override
     public boolean isEmpty() {
         if (size == 0) {
             return true;
@@ -61,11 +67,13 @@ public class ArrayDeque<T> {
     }
 
     /** Returns the number of items in the list. */
+    @Override
     public int size() {
         return size;
     }
 
-    /** Prints the items in the deque from first to last. 尚不清楚遇到null的空链 */
+    /** Prints the items in the deque from first to last. */
+    @Override
     public void printDeque() {
         int first_index = first_index_calculate();
         for (int i = 0; i < size; i++ ) {
@@ -86,6 +94,7 @@ public class ArrayDeque<T> {
 
     /** Deletes item from front of the list and
      * returns deleted item. */
+    @Override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -106,6 +115,7 @@ public class ArrayDeque<T> {
 
     /** Deletes item from back of the list and
      * returns deleted item. */
+    @Override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -137,6 +147,7 @@ public class ArrayDeque<T> {
     }
 
     /** Gets the ith item in the list (0 is the front).*/
+    @Override
     public T get(int i) {
         if (i >= size) {
             return null;
@@ -148,6 +159,35 @@ public class ArrayDeque<T> {
                 return items[first_index + i - items.length];
             }
         }
+    }
+
+    /** Provide this method to return an iterator. */
+//    public Iterator<T> iterator() {}
+
+    /** Returns whether the parameter o is equal to the Deque. */
+    public boolean equals(Object o){
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+        if (o instanceof ArrayDeque == false) {
+            return false;
+        }
+        ArrayDeque<T> other = (ArrayDeque<T>) o;
+        if (other.size() != this.size()) {
+            return false;
+        }
+        for (int i = 0; i < size; i = i + 1) {
+            if (! other.get(i).equals(this.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 

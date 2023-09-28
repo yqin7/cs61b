@@ -57,6 +57,7 @@ public class ArrayDequeTest {
 
         ANobug.addLast(8);
 
+//        System.out.println(ANobug.get(2));
         assertEquals(ANobug.size(), 9);
         assertEquals(ANobug.getLast().longValue(), 8);
         assertEquals(ANobug.getFirst().longValue(), 0);
@@ -131,6 +132,45 @@ public class ArrayDequeTest {
         int randVal5 = StdRandom.uniform(0, 60);
         System.out.println("randVal 5 is " + randVal5);
         System.out.println(L.get(randVal5));
+    }
+
+    @Test
+    public void equal_test() {
+        /* Same Object Test. */
+        ArrayDeque<Integer> ANobug = new ArrayDeque<>();
+        ANobug.addFirst(0);
+        ANobug.addLast(1);
+        ANobug.addLast(2);
+        ANobug.addLast(3);
+        ArrayDeque<Integer> copyA = ANobug;
+        assertEquals(ANobug.equals(copyA), true);
+
+        /* Same contents Test. */
+        ArrayDeque<Integer> BNobug = new ArrayDeque<>();
+        BNobug.addFirst(0);
+        BNobug.addLast(1);
+        BNobug.addLast(2);
+        BNobug.addLast(3);
+        assertEquals(ANobug.equals(BNobug),true);
+
+        /* Different size Test. */
+        BNobug.addFirst(-1);
+        assertEquals(ANobug.equals(BNobug),false);
+
+        /* Same size with different contents Test. */
+        BNobug.removeLast();
+        assertEquals(ANobug.equals(BNobug),false);
+
+        /* Different objects Test. */
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        lld1.addFirst(0);
+        lld1.addLast(1);
+        lld1.addLast(2);
+        lld1.addLast(3);
+        assertEquals(ANobug.equals(lld1),false);
+
+        /* Null Test. */
+        assertEquals(ANobug.equals(null),false);
     }
 }
 

@@ -136,4 +136,45 @@ public class LinkedListDequeTest {
 
 
     }
+
+    @Test
+    public void equal_test() {
+        /* Same Object Test. */
+        LinkedListDeque<Integer> ANobug = new LinkedListDeque<>();
+        ANobug.addFirst(0);
+        ANobug.addLast(1);
+        ANobug.addLast(2);
+        ANobug.addLast(3);
+        LinkedListDeque<Integer> copyA = ANobug;
+//        System.out.println(ANobug.get(2));
+        assertEquals(2, ANobug.get(2).longValue());
+        assertEquals(ANobug.equals(copyA), true);
+
+        /* Same contents Test. */
+        LinkedListDeque<Integer> BNobug = new LinkedListDeque<>();
+        BNobug.addFirst(0);
+        BNobug.addLast(1);
+        BNobug.addLast(2);
+        BNobug.addLast(3);
+        assertEquals(true, ANobug.equals(BNobug));
+
+        /* Different size Test. */
+        BNobug.addFirst(-1);
+        assertEquals(ANobug.equals(BNobug),false);
+
+        /* Same size with different contents Test. */
+        BNobug.removeLast();
+        assertEquals(ANobug.equals(BNobug),false);
+
+        /* Different objects Test. */
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        lld1.addFirst(0);
+        lld1.addLast(1);
+        lld1.addLast(2);
+        lld1.addLast(3);
+        assertEquals(ANobug.equals(lld1),false);
+
+        /* Null Test. */
+        assertEquals(ANobug.equals(null),false);
+    }
 }
