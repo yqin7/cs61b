@@ -1,4 +1,5 @@
 package deque;
+import java.util.Iterator;
 
 import net.sf.saxon.functions.ConstantFunction;
 
@@ -162,7 +163,36 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     /** Provide this method to return an iterator. */
-//    public Iterator<T> iterator() {}
+    public Iterator<T> iterator() {
+        return new ArrayIterator();
+    }
+
+    private class ArrayIterator implements Iterator<T> {
+        private int pos;
+        private int count_pos;
+        public ArrayIterator() {
+            pos = first_index_calculate()   ;
+            count_pos = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return count_pos < size;
+        }
+        public T next() {
+            T return_item = items[pos];
+            count_pos = count_pos + 1;
+            pos = dynamic_first_index_calculate();
+            return return_item;
+        }
+        private int dynamic_first_index_calculate() {
+            if (pos == items.length - 1) {
+                return 0;
+            }
+            else {
+                return pos + 1;
+            }
+        }
+    }
 
     /** Returns whether the parameter o is equal to the Deque. */
     public boolean equals(Object o){

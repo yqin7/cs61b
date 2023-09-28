@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class ArrayDequeTest {
@@ -87,8 +90,7 @@ public class ArrayDequeTest {
                 int Last = L.getLast();
                 System.out.println("getLast(" + Last + ")");
 
-            }
-            else if (operationNumber == 2) {
+            } else if (operationNumber == 2) {
                 int randVal = StdRandom.uniform(0, 100);
                 L.addFirst(randVal);
                 System.out.println("addFirst(" + randVal + ")");
@@ -151,15 +153,15 @@ public class ArrayDequeTest {
         BNobug.addLast(1);
         BNobug.addLast(2);
         BNobug.addLast(3);
-        assertEquals(ANobug.equals(BNobug),true);
+        assertEquals(ANobug.equals(BNobug), true);
 
         /* Different size Test. */
         BNobug.addFirst(-1);
-        assertEquals(ANobug.equals(BNobug),false);
+        assertEquals(ANobug.equals(BNobug), false);
 
         /* Same size with different contents Test. */
         BNobug.removeLast();
-        assertEquals(ANobug.equals(BNobug),false);
+        assertEquals(ANobug.equals(BNobug), false);
 
         /* Different objects Test. */
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
@@ -167,10 +169,38 @@ public class ArrayDequeTest {
         lld1.addLast(1);
         lld1.addLast(2);
         lld1.addLast(3);
-        assertEquals(ANobug.equals(lld1),false);
+        assertEquals(ANobug.equals(lld1), false);
 
         /* Null Test. */
-        assertEquals(ANobug.equals(null),false);
+        assertEquals(ANobug.equals(null), false);
+    }
+
+    @Test
+    public void iter_test() {
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+
+        int N = 50;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 2);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 100);
+                L.addLast(randVal);
+                System.out.println("addLast(" + randVal + ")");
+            } else if (operationNumber == 1) {
+                int randVal = StdRandom.uniform(0, 100);
+                L.addFirst(randVal);
+                System.out.println("addFirst(" + randVal + ")");
+            }
+        }
+
+        L.printDeque();
+        Iterator<Integer> aseer = L.iterator();
+
+        while (aseer.hasNext()) {
+            int j = aseer.next();
+            System.out.println(j);
+        }
     }
 }
 
