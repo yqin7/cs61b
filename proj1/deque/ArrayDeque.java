@@ -71,12 +71,12 @@ public class ArrayDeque<T> implements Deque<T> {
     /** Prints the items in the deque from first to last. */
     @Override
     public void printDeque() {
-        int first_index = first_index_calculate();
+        int firstIndex = firstIndexCalculate();
         for (int i = 0; i < size; i++ ) {
-            if (i + first_index < items.length) {
-                System.out.print(items[i + first_index] + " ");
+            if (i + firstIndex < items.length) {
+                System.out.print(items[i + firstIndex] + " ");
             } else {
-                System.out.print(items[i + first_index - items.length] + " ");
+                System.out.print(items[i + firstIndex - items.length] + " ");
             }
         }
         System.out.println();
@@ -84,8 +84,8 @@ public class ArrayDeque<T> implements Deque<T> {
 
     /** Returns the item from the front of the list. */
     public T getFirst() {
-        int first_index = first_index_calculate();
-        return items[first_index];
+        int firstIndex = firstIndexCalculate();
+        return items[firstIndex];
     }
 
     /** Deletes item from front of the list and
@@ -96,17 +96,17 @@ public class ArrayDeque<T> implements Deque<T> {
             return null;
         }
         T x = getFirst();
-        int first_index = first_index_calculate();
-        nextFirst = first_index;
-        items[first_index] = null;
+        int firstIndex = firstIndexCalculate();
+        nextFirst = firstIndex;
+        items[firstIndex] = null;
         size = size - 1;
         return x;
     }
 
     /** Returns the item from the back of the list. */
     public T getLast() {
-        int last_index = last_index_calculate();
-        return items[last_index];
+        int lastIndex = lastIndexCalculate();
+        return items[lastIndex];
     }
 
     /** Deletes item from back of the list and
@@ -117,15 +117,15 @@ public class ArrayDeque<T> implements Deque<T> {
             return null;
         }
         T x = getLast();
-        int last_index = last_index_calculate();
-        nextLast = last_index;
-        items[last_index] = null;
+        int lastIndex = lastIndexCalculate();
+        nextLast = lastIndex;
+        items[lastIndex] = null;
         size = size - 1;
         return x;
     }
     
-    /** Returns the first index. If nextFirst equal to items' length - 1, first index should be zero. */
-    private int first_index_calculate() {
+    /** Returns the 1st index. If nextFirst equal to items' length - 1, first index should be 0. */
+    private int firstIndexCalculate() {
         if (nextFirst == items.length - 1) {
             return 0;
         } else {
@@ -134,7 +134,7 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /** Returns the last index. If nextLast equal 0, last index should be items' length - 1. */
-    private int last_index_calculate() {
+    private int lastIndexCalculate() {
         if (nextLast == 0) {
             return items.length - 1;
         } else {
@@ -148,11 +148,11 @@ public class ArrayDeque<T> implements Deque<T> {
         if (i >= size) {
             return null;
         } else {
-            int first_index = first_index_calculate();
-            if (first_index + i < items.length) {
-                return items[first_index + i];
+            int firstIndex = firstIndexCalculate();
+            if (firstIndex + i < items.length) {
+                return items[firstIndex + i];
             } else {
-                return items[first_index + i - items.length];
+                return items[firstIndex + i - items.length];
             }
         }
     }
@@ -164,33 +164,32 @@ public class ArrayDeque<T> implements Deque<T> {
 
     private class ArrayIterator implements Iterator<T> {
         private int pos;
-        private int count_pos;
-        public ArrayIterator() {
-            pos = first_index_calculate();
-            count_pos = 0;
+        private int countPos;
+        ArrayIterator() {
+            pos = firstIndexCalculate();
+            countPos = 0;
         }
         @Override
         public boolean hasNext() {
-            return count_pos < size;
+            return countPos < size;
         }
         public T next() {
-            T return_item = items[pos];
-            count_pos = count_pos + 1;
-            pos = dynamic_first_index_calculate();
-            return return_item;
+            T returnItem = items[pos];
+            countPos = countPos + 1;
+            pos = dynamicFirstIndexCalculate();
+            return returnItem;
         }
-        private int dynamic_first_index_calculate() {
+        private int dynamicFirstIndexCalculate() {
             if (pos == items.length - 1) {
                 return 0;
-            }
-            else {
+            } else {
                 return pos + 1;
             }
         }
     }
 
     /** Returns whether the parameter o is equal to the Deque. */
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -200,7 +199,7 @@ public class ArrayDeque<T> implements Deque<T> {
 //        if (o.getClass() != this.getClass()) {
 //            return false;
 //        }
-        if (o instanceof ArrayDeque == false) {
+        if (!(o instanceof ArrayDeque)) {
             return false;
         }
         ArrayDeque<T> other = (ArrayDeque<T>) o;
@@ -208,7 +207,7 @@ public class ArrayDeque<T> implements Deque<T> {
             return false;
         }
         for (int i = 0; i < size; i = i + 1) {
-            if (! other.get(i).equals(this.get(i))) {
+            if (!(other.get(i).equals(this.get(i)))) {
                 return false;
             }
         }
