@@ -202,9 +202,9 @@ public class LinkedListDequeTest {
             lld1.addFirst(i);
         }
 
-        assertEquals(0, lld1.getRecursive(0).longValue());
-        assertEquals(1, lld1.getRecursive(1).longValue());
-        assertEquals(37, lld1.getRecursive(37).longValue());
+        assertEquals(0, lld1.getRecursive(49).longValue());
+        assertEquals(48, lld1.getRecursive(1).longValue());
+        assertEquals(39, lld1.getRecursive(10).longValue());
     }
 
     @Test

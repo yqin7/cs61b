@@ -12,7 +12,6 @@ public class LinkedListDeque<T> implements Deque<T> {
             prev = p;
             item = i;
             next = n;
-            // System.out.println(size);
         }
     }
     private StuffNode sentinel;
@@ -39,12 +38,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     public void addFirst(T item) {
         sentinel.next = new StuffNode(sentinel, item, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
-//        last.prev = sentinel.next;
         last = sentinel.prev;
-//        if (size == 0) {
-//            last = sentinel.next;
-//        }
-//        sentinel.prev = last;
         size = size + 1;
     }
 
@@ -168,9 +162,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         if (o == null) {
             return false;
         }
-//        if (o.getClass() != this.getClass()) {
-//            return false;
-//        }
         if (o instanceof LinkedListDeque == false) {
             return false;
         }
