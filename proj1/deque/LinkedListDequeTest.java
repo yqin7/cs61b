@@ -233,12 +233,15 @@ public class LinkedListDequeTest {
     public void a006_test() {
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
         lld1.addLast(0);
-        assertEquals(0, lld1.removeFirst().longValue());
-        assertEquals(0, lld1.size());
-        lld1.addLast(3);
-        lld1.addFirst(4);
-        assertEquals(4, lld1.removeFirst().longValue());
-        assertEquals(1, lld1.size());
+//        assertEquals(0, lld1.removeFirst().longValue());
+//        assertEquals(0, lld1.size());
+        lld1.addFirst(1);
+        assertEquals(0, lld1.removeLast().longValue());
+        assertEquals(1, lld1.removeLast().longValue());
+        lld1.addFirst(2);
+        lld1.addFirst(3);
+        assertEquals(2, lld1.removeLast().longValue());
+        assertEquals(3, lld1.removeLast().longValue());
     }
 
 }
