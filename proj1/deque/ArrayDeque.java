@@ -2,7 +2,7 @@ package deque;
 import java.util.Iterator;
 
 
-public class ArrayDeque<T> implements Deque<T>{
+public class ArrayDeque<T> implements Deque<T> {
     private T[] items;
     private int size;
     private int next_first;
@@ -201,9 +201,9 @@ public class ArrayDeque<T> implements Deque<T>{
         if (o == null) {
             return false;
         }
-        if (o.getClass() != this.getClass()) {
-            return false;
-        }
+//        if (o.getClass() != this.getClass()) {
+//            return false;
+//        }
         if (o instanceof ArrayDeque == false) {
             return false;
         }

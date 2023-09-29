@@ -207,5 +207,39 @@ public class LinkedListDequeTest {
         assertEquals(37, lld1.getRecursive(37).longValue());
     }
 
+    @Test
+    public void a004_test() {
+        LinkedListDeque<Integer> LinkedListDeque = new LinkedListDeque<>();
+        LinkedListDeque.isEmpty();
+        LinkedListDeque.addLast(1);
+        LinkedListDeque.isEmpty();
+        LinkedListDeque.removeLast();
+        assertEquals(true, LinkedListDeque.isEmpty());
+    }
+
+    @Test
+    public void a005_test() {
+        LinkedListDeque<Integer> LinkedListDeque = new LinkedListDeque<>();
+        LinkedListDeque.addLast(0);
+        assertEquals(0, LinkedListDeque.removeFirst().longValue());
+        LinkedListDeque.addLast(2);
+        LinkedListDeque.addLast(3);
+        LinkedListDeque.addLast(4);
+        assertEquals(false, LinkedListDeque.isEmpty());
+        assertEquals(3, LinkedListDeque.size());
+    }
+
+    @Test
+    public void a006_test() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        lld1.addLast(0);
+        assertEquals(0, lld1.removeFirst().longValue());
+        assertEquals(0, lld1.size());
+        lld1.addLast(3);
+        lld1.addFirst(4);
+        assertEquals(4, lld1.removeFirst().longValue());
+        assertEquals(1, lld1.size());
+    }
+
 }
 

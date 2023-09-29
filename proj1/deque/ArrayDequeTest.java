@@ -169,7 +169,7 @@ public class ArrayDequeTest {
         lld1.addLast(1);
         lld1.addLast(2);
         lld1.addLast(3);
-        assertEquals(ANobug.equals(lld1), false);
+        assertEquals(false, ANobug.equals(lld1));
 
         /* Null Test. */
         assertEquals(ANobug.equals(null), false);

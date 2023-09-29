@@ -86,6 +86,10 @@ public class LinkedListDeque<T> implements Deque<T> {
          T p = sentinel.next.item;
          sentinel.next = sentinel.next.next;
          size = size - 1;
+         if (size == 0) {
+             last = sentinel;
+         }
+         sentinel.prev = last;
          return p;
         }
     }
@@ -98,7 +102,11 @@ public class LinkedListDeque<T> implements Deque<T> {
         else {
             T p = last.item;
             last = last.prev;
+            sentinel.prev = last;
             size = size - 1;
+            if (size == 0) {
+                sentinel.next = last;
+            }
             return p;
         }
     }
@@ -162,9 +170,9 @@ public class LinkedListDeque<T> implements Deque<T> {
         if (o == null) {
             return false;
         }
-        if (o.getClass() != this.getClass()) {
-            return false;
-        }
+//        if (o.getClass() != this.getClass()) {
+//            return false;
+//        }
         if (o instanceof LinkedListDeque == false) {
             return false;
         }
