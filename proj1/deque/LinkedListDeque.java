@@ -39,10 +39,12 @@ public class LinkedListDeque<T> implements Deque<T> {
     public void addFirst(T item) {
         sentinel.next = new StuffNode(sentinel, item, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
-        if (size == 0) {
-            last = sentinel.next;
-        }
-        sentinel.prev = last;
+//        last.prev = sentinel.next;
+        last = sentinel.prev;
+//        if (size == 0) {
+//            last = sentinel.next;
+//        }
+//        sentinel.prev = last;
         size = size + 1;
     }
 
@@ -83,14 +85,12 @@ public class LinkedListDeque<T> implements Deque<T> {
     public T removeFirst() {
         if (size == 0) {
             return null;
-        }else {
+        } else {
          T p = sentinel.next.item;
          sentinel.next = sentinel.next.next;
+         sentinel.next.prev = sentinel;
+         last = sentinel.prev;
          size = size - 1;
-         if (size == 0) {
-             last = sentinel;
-         }
-         sentinel.prev = last;
          return p;
         }
     }
@@ -99,15 +99,12 @@ public class LinkedListDeque<T> implements Deque<T> {
     public T removeLast() {
         if (size == 0) {
             return null;
-        }
-        else {
+        } else {
             T p = last.item;
             last = last.prev;
+            last.next = sentinel;
             sentinel.prev = last;
             size = size - 1;
-            if (size == 0) {
-                sentinel.next = last;
-            }
             return p;
         }
     }
