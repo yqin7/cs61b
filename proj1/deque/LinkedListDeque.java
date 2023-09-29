@@ -4,11 +4,11 @@ import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T> {
     private class StuffNode {
-        public StuffNode prev;
-        public T item;
-        public StuffNode next;
+        StuffNode prev;
+        T item;
+        StuffNode next;
 
-        public StuffNode(StuffNode p, T i, StuffNode n) {
+        StuffNode(StuffNode p, T i, StuffNode n) {
             prev = p;
             item = i;
             next = n;
@@ -52,11 +52,11 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public boolean isEmpty() {
-        if (sentinel.next == sentinel) {
-            return true;
-        } else{
-            return false;
-        }
+        return sentinel.next == sentinel;
+
+
+
+
     }
 
     @Override
@@ -80,12 +80,12 @@ public class LinkedListDeque<T> implements Deque<T> {
         if (size == 0) {
             return null;
         } else {
-         T p = sentinel.next.item;
-         sentinel.next = sentinel.next.next;
-         sentinel.next.prev = sentinel;
-         last = sentinel.prev;
-         size = size - 1;
-         return p;
+            T p = sentinel.next.item;
+            sentinel.next = sentinel.next.next;
+            sentinel.next.prev = sentinel;
+            last = sentinel.prev;
+            size = size - 1;
+            return p;
         }
     }
 
@@ -104,7 +104,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public T get(int index){
+    public T get(int index) {
         StuffNode p = sentinel.next;
         if (index > size) {
             return null;
@@ -117,14 +117,14 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     public T getRecursive(int index) {
-        return getRecursive_helper(index, sentinel.next);
+        return getRecursiveHelper(index, sentinel.next);
     }
 
-    private T getRecursive_helper(int index, StuffNode p) {
+    private T getRecursiveHelper(int index, StuffNode p) {
         if (index == 0) {
             return p.item;
         } else {
-            return getRecursive_helper(index - 1, p.next);
+            return getRecursiveHelper(index - 1, p.next);
         }
     }
 
@@ -135,7 +135,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     private class LinkedListIterator implements Iterator<T> {
         private int pos;
 
-        public LinkedListIterator() {
+        LinkedListIterator() {
             pos = 0;
         }
 
@@ -144,25 +144,25 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
 
         public T next() {
-            StuffNode return_node = sentinel;
+            StuffNode returnNode = sentinel;
             pos = pos + 1;
             for (int i = 0; i < pos; i = i + 1) {
-                return_node = return_node.next;
+                returnNode = returnNode.next;
             }
-            return return_node.item;
+            return returnNode.item;
         }
 
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
         if (o == null) {
             return false;
         }
-        if (o instanceof LinkedListDeque == false) {
+        if (!(o instanceof LinkedListDeque)) {
             return false;
         }
         LinkedListDeque<T> other = (LinkedListDeque<T>) o;
@@ -170,11 +170,11 @@ public class LinkedListDeque<T> implements Deque<T> {
             return false;
         }
         for (int i = 0; i < this.size(); i = i + 1) {
-            if (! other.get(i).equals(this.get(i))) {
+            if (!(other.get(i).equals(this.get(i)))) {
                 return false;
             }
         }
-            return true;
+        return true;
     }
 }
 

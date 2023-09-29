@@ -34,8 +34,8 @@ public class ArrayDeque<T> implements Deque<T> {
     /** Resizes the underlying array to the target capacity. */
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        System.arraycopy(items,nextFirst + 1,a,0,items.length - nextFirst - 1);
-        System.arraycopy(items,0,a,items.length - nextFirst - 1,nextFirst + 1);
+        System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
+        System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextFirst + 1);
         items = a;
         nextFirst = items.length - 1;
         nextLast = items.length / 2;
@@ -72,7 +72,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public void printDeque() {
         int firstIndex = firstIndexCalculate();
-        for (int i = 0; i < size; i++ ) {
+        for (int i = 0; i < size; i++) {
             if (i + firstIndex < items.length) {
                 System.out.print(items[i + firstIndex] + " ");
             } else {
