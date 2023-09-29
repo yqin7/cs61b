@@ -1,7 +1,6 @@
 package deque;
 import java.util.Iterator;
 
-import net.sf.saxon.functions.ConstantFunction;
 
 public class ArrayDeque<T> implements Deque<T>{
     private T[] items;
