@@ -175,7 +175,9 @@ public class LinkedListDequeTest {
         lld1.addLast(1);
         lld1.addLast(2);
         lld1.addLast(3);
-        assertEquals(ANobug.equals(lld1),false);
+        assertEquals(true, ANobug.equals(lld1));
+        lld1.addLast(4);
+        assertEquals(false, ANobug.equals(lld1));
 
         /* Null Test. */
         assertEquals(ANobug.equals(null),false);
