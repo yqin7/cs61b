@@ -5,15 +5,15 @@ import java.util.Iterator;
 public class ArrayDeque<T> implements Deque<T> {
     private T[] items;
     private int size;
-    private int next_first;
-    private int next_last;
+    private int nextFirst;
+    private int nextLast;
 
     /** Creates an empty list. */   
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        next_first = 4;
-        next_last = 5;
+        nextFirst = 4;
+        nextLast = 5;
     }
 
     /** Inserts X into the front of the list. */
@@ -22,23 +22,23 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == items.length) {
             resize(size * 2);
         }
-        items[next_first] = item;
+        items[nextFirst] = item;
         size = size + 1;
-        if (next_first == 0) {
-            next_first = items.length - 1;
+        if (nextFirst == 0) {
+            nextFirst = items.length - 1;
         } else {
-            next_first = next_first - 1;
+            nextFirst = nextFirst - 1;
         }
     }
 
     /** Resizes the underlying array to the target capacity. */
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        System.arraycopy(items, next_first + 1, a, 0, items.length - next_first - 1);
-        System.arraycopy(items,0, a,items.length - next_first - 1, next_first + 1);
+        System.arraycopy(items,nextFirst + 1,a,0,items.length - nextFirst - 1);
+        System.arraycopy(items,0,a,items.length - nextFirst - 1,nextFirst + 1);
         items = a;
-        next_first = items.length - 1;
-        next_last = items.length / 2;
+        nextFirst = items.length - 1;
+        nextLast = items.length / 2;
     }
 
     /** Inserts X into the back of the list. */
@@ -47,23 +47,19 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == items.length) {
             resize(size * 2);
         }
-        items[next_last] = x;
+        items[nextLast] = x;
         size = size + 1;
-        if (next_last == items.length - 1) {
-            next_last = 0;
+        if (nextLast == items.length - 1) {
+            nextLast = 0;
         } else {
-            next_last = next_last + 1;
+            nextLast = nextLast + 1;
         }
     }
 
     /** Return if array is empty or not. */
     @Override
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return size == 0;
     }
 
     /** Returns the number of items in the list. */
@@ -101,7 +97,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         T x = getFirst();
         int first_index = first_index_calculate();
-        next_first = first_index;
+        nextFirst = first_index;
         items[first_index] = null;
         size = size - 1;
         return x;
@@ -122,27 +118,27 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         T x = getLast();
         int last_index = last_index_calculate();
-        next_last = last_index;
+        nextLast = last_index;
         items[last_index] = null;
         size = size - 1;
         return x;
     }
     
-    /** Returns the first index. If next_first equal to items' length - 1, first index should be zero. */
+    /** Returns the first index. If nextFirst equal to items' length - 1, first index should be zero. */
     private int first_index_calculate() {
-        if (next_first == items.length - 1) {
+        if (nextFirst == items.length - 1) {
             return 0;
         } else {
-            return next_first + 1;
+            return nextFirst + 1;
         }
     }
 
-    /** Returns the last index. If next_last equal 0, last index should be items' length - 1. */
+    /** Returns the last index. If nextLast equal 0, last index should be items' length - 1. */
     private int last_index_calculate() {
-        if (next_last == 0) {
+        if (nextLast == 0) {
             return items.length - 1;
         } else {
-            return next_last - 1;
+            return nextLast - 1;
         }
     }
 
