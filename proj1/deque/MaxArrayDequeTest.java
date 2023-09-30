@@ -24,14 +24,16 @@ public class MaxArrayDequeTest {
         }
     };
 
-
     @Test
     public void maxGivenComparatorTest() {
         MaxArrayDeque<Integer> L = new MaxArrayDeque<Integer>(cmp);
+        System.out.println(L.max());
+        System.out.println(L.max(cmp));
         int N = 49;
         for (int i = 0; i < N; i += 1) {
             L.addLast(i);
         }
         System.out.println(L.max());
+        System.out.println(L.max(cmp));
     }
 }
