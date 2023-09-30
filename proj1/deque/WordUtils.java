@@ -13,9 +13,8 @@ public class WordUtils {
         return list.get(maxDex);
     }
 
-    /** LLD still have bugs, due to not resolve sentinel which plays part in length comparison. */
     public static void main(String[] args) {
-        ArrayDeque<String> someList = new ArrayDeque<>();
+        Deque<String> someList = new LinkedListDeque<>();
         someList.addLast("elk");
         someList.addLast("are");
         someList.addLast("watching");
