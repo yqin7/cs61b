@@ -11,10 +11,16 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
     }
 
     public T max() {
-        if (maxArray.isEmpty()) {
+        if (this.isEmpty()) {
             return null;
         } else {
-            return null;
+            T max_number = this.get(0);
+            for (int i = 0; i < this.size(); i = i + 1) {
+                if (comparator.compare(max_number, this.get(i)) < 0) {
+                    max_number = this.get(i);
+                }
+            }
+            return max_number;
         }
     }
 
