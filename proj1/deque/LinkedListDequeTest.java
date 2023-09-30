@@ -190,7 +190,7 @@ public class LinkedListDequeTest {
             lld1.addLast(i);
         }
         lld1.printDeque();
-        Iterator<Integer> aseer = lld1.iterator();
+        Iterable<Integer> aseer = lld1.iterator();
         while (aseer.hasNext()) {
             int j = aseer.next();
             System.out.println(j);

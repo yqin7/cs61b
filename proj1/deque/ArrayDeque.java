@@ -57,10 +57,10 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /** Return if array is empty or not. */
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
+//    @Override
+//    private boolean isEmpty() {
+//        return size == 0;
+//    }
 
     /** Returns the number of items in the list. */
     @Override
@@ -83,7 +83,7 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /** Returns the item from the front of the list. */
-    public T getFirst() {
+    private T getFirst() {
         int firstIndex = firstIndexCalculate();
         return items[firstIndex];
     }
@@ -123,7 +123,7 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /** Returns the item from the back of the list. */
-    public T getLast() {
+    private T getLast() {
         int lastIndex = lastIndexCalculate();
         return items[lastIndex];
     }
@@ -180,11 +180,11 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /** Provide this method to return an iterator. */
-    public Iterator<T> iterator() {
+    public Iterable<T> iterator() {
         return new ArrayIterator();
     }
 
-    private class ArrayIterator implements Iterator<T> {
+    private class ArrayIterator implements Iterable<T> {
         private int pos;
         private int countPos;
         ArrayIterator() {
@@ -195,6 +195,7 @@ public class ArrayDeque<T> implements Deque<T> {
         public boolean hasNext() {
             return countPos < size;
         }
+        @Override
         public T next() {
             T returnItem = items[pos];
             countPos = countPos + 1;

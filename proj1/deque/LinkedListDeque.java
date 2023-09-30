@@ -26,13 +26,13 @@ public class LinkedListDeque<T> implements Deque<T> {
         this.size = 0;
     }
 
-    public LinkedListDeque(T x) {
-        sentinel = new StuffNode(null, null, null);
-        sentinel.next = new StuffNode(sentinel, x, sentinel.next);
-        last = sentinel.next;
-        sentinel.prev = sentinel.next.next;
-        size = 1;
-    }
+//    public LinkedListDeque(T x) {
+//        sentinel = new StuffNode(null, null, null);
+//        sentinel.next = new StuffNode(sentinel, x, sentinel.next);
+//        last = sentinel.next;
+//        sentinel.prev = sentinel.next.next;
+//        size = 1;
+//    }
 
     @Override
     public void addFirst(T item) {
@@ -50,10 +50,10 @@ public class LinkedListDeque<T> implements Deque<T> {
         size = size + 1;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return sentinel.next == sentinel;
-    }
+//    @Override
+//    public boolean isEmpty() {
+//        return sentinel.next == sentinel;
+//    }
 
     @Override
     public int size() {
@@ -124,11 +124,11 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    public Iterator<T> iterator() {
+    public Iterable<T> iterator() {
         return new LinkedListIterator();
     }
 
-    private class LinkedListIterator implements Iterator<T> {
+    private class LinkedListIterator implements Iterable<T> {
         private int pos;
 
         LinkedListIterator() {

@@ -62,8 +62,7 @@ public class ArrayDequeTest {
 
 //        System.out.println(ANobug.get(2));
         assertEquals(ANobug.size(), 9);
-        assertEquals(ANobug.getLast().longValue(), 8);
-        assertEquals(ANobug.getFirst().longValue(), 0);
+        assertEquals(ANobug.get(0).longValue(), 0);
         assertEquals(ANobug.get(5).longValue(), 5);
     }
 
@@ -87,7 +86,7 @@ public class ArrayDequeTest {
 //                System.out.println("removeLast(" + Last + ")");
 //            }
             else if (operationNumber == 1 && L.size() > 0) {
-                int Last = L.getLast();
+                int Last = L.get(L.size() - 1);
                 System.out.println("getLast(" + Last + ")");
 
             } else if (operationNumber == 2) {
@@ -101,14 +100,13 @@ public class ArrayDequeTest {
 //                System.out.println("removeFirst(" + First + ")");
 //            }
             else if (operationNumber == 3 && L.size() > 0) {
-                int First = L.getFirst();
+                int First = L.get(0);
                 System.out.println("getFirst(" + First + ")");
             }
         }
 
         L.printDeque();
-        System.out.println(L.getFirst());
-        System.out.println(L.getLast());
+        System.out.println(L.get(0));
 
 
         int randVal = StdRandom.uniform(0, 60);
@@ -197,7 +195,7 @@ public class ArrayDequeTest {
         }
 
         L.printDeque();
-        Iterator<Integer> aseer = L.iterator();
+        Iterable<Integer> aseer = L.iterator();
 
         while (aseer.hasNext()) {
             int j = aseer.next();
