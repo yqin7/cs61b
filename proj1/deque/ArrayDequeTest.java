@@ -195,7 +195,7 @@ public class ArrayDequeTest {
         }
 
         L.printDeque();
-        Iterable<Integer> aseer = L.iterator();
+        Iterator<Integer> aseer = L.iterator();
 
         while (aseer.hasNext()) {
             int j = aseer.next();

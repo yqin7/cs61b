@@ -180,11 +180,12 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /** Provide this method to return an iterator. */
-    public Iterable<T> iterator() {
+
+    public Iterator<T> iterator() {
         return new ArrayIterator();
     }
 
-    private class ArrayIterator implements Iterable<T> {
+    private class ArrayIterator implements Iterator<T> {
         private int pos;
         private int countPos;
         ArrayIterator() {
@@ -195,7 +196,6 @@ public class ArrayDeque<T> implements Deque<T> {
         public boolean hasNext() {
             return countPos < size;
         }
-        @Override
         public T next() {
             T returnItem = items[pos];
             countPos = countPos + 1;
