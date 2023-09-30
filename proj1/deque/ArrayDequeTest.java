@@ -204,6 +204,41 @@ public class ArrayDequeTest {
             System.out.println(j);
         }
     }
+
+    @Test
+    public void resizeTest() {
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+
+        int N = 20000;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 2);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 100);
+                L.addLast(randVal);
+                System.out.println("addLast(" + randVal + ")");
+            } else if (operationNumber == 1) {
+                int randVal = StdRandom.uniform(0, 100);
+                L.addFirst(randVal);
+                System.out.println("addFirst(" + randVal + ")");
+            }
+        }
+        L.printDeque();
+
+        N = 19994;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 2);
+            if (operationNumber == 0) {
+                L.removeLast();
+                System.out.println("removeLast");
+            } else if (operationNumber == 1) {
+                int randVal = StdRandom.uniform(0, 100);
+                L.removeFirst();
+                System.out.println("removeFirst");
+            }
+        }
+        L.printDeque();
+    }
 }
 
 

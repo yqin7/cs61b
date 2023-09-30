@@ -100,7 +100,24 @@ public class ArrayDeque<T> implements Deque<T> {
         nextFirst = firstIndex;
         items[firstIndex] = null;
         size = size - 1;
+        if (size <= items.length * 0.25) {
+            resizeDown(size);
+        }
         return x;
+    }
+
+    private void resizeDown(int capacity) {
+        T[] a = (T[]) new Object[capacity];
+        if (items[0] != null && items[items.length - 1] != null) {
+            System.arraycopy(items, firstIndexCalculate(), a, 0, items.length - firstIndexCalculate());
+            System.arraycopy(items, 0, a, items.length - firstIndexCalculate(), size - (items.length - firstIndexCalculate()));
+            items = a;
+        } else {
+            System.arraycopy(items, firstIndexCalculate(), a, 0, size);
+            items = a;
+        }
+        nextFirst = items.length - 1;
+        nextLast = 0;
     }
 
     /** Returns the item from the back of the list. */
@@ -121,6 +138,9 @@ public class ArrayDeque<T> implements Deque<T> {
         nextLast = lastIndex;
         items[lastIndex] = null;
         size = size - 1;
+        if (size <= items.length * 0.25) {
+            resizeDown(size);
+        }
         return x;
     }
     
@@ -196,9 +216,6 @@ public class ArrayDeque<T> implements Deque<T> {
         if (o == null) {
             return false;
         }
-//        if (o.getClass() != this.getClass()) {
-//            return false;
-//        }
         if (!(o instanceof Deque)) {
             return false;
         }
