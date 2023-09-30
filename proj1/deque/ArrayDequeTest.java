@@ -239,6 +239,21 @@ public class ArrayDequeTest {
         }
         L.printDeque();
     }
+
+    @Test
+    public void resizeEmptyTest() {
+        ArrayDeque<Integer> ArrayDeque = new ArrayDeque<>();
+        ArrayDeque.isEmpty();
+        ArrayDeque.addLast(1);
+        ArrayDeque.removeFirst();
+        ArrayDeque.isEmpty();
+        ArrayDeque.isEmpty();
+        ArrayDeque.isEmpty();
+        ArrayDeque.addLast(6);
+    }
 }
+
+
+
 
 

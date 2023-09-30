@@ -100,7 +100,7 @@ public class ArrayDeque<T> implements Deque<T> {
         nextFirst = firstIndex;
         items[firstIndex] = null;
         size = size - 1;
-        if (size <= items.length * 0.25) {
+        if (size <= items.length * 0.25 && size > 8) {
             resizeDown(size);
         }
         return x;
@@ -109,8 +109,10 @@ public class ArrayDeque<T> implements Deque<T> {
     private void resizeDown(int capacity) {
         T[] a = (T[]) new Object[capacity];
         if (items[0] != null && items[items.length - 1] != null) {
-            System.arraycopy(items, firstIndexCalculate(), a, 0, items.length - firstIndexCalculate());
-            System.arraycopy(items, 0, a, items.length - firstIndexCalculate(), size - (items.length - firstIndexCalculate()));
+            System.arraycopy(items, firstIndexCalculate(), a, 0,
+                    items.length - firstIndexCalculate());
+            System.arraycopy(items, 0, a, items.length - firstIndexCalculate(),
+                    size - (items.length - firstIndexCalculate()));
             items = a;
         } else {
             System.arraycopy(items, firstIndexCalculate(), a, 0, size);
@@ -138,7 +140,7 @@ public class ArrayDeque<T> implements Deque<T> {
         nextLast = lastIndex;
         items[lastIndex] = null;
         size = size - 1;
-        if (size <= items.length * 0.25) {
+        if (size <= items.length * 0.25 && size > 8) {
             resizeDown(size);
         }
         return x;
