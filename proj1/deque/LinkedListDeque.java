@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-/* If implements Iterable, we must have a iterator method. */
+/* If implements Iterable, we must have an iterator method. */
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private class StuffNode {
         StuffNode prev;
