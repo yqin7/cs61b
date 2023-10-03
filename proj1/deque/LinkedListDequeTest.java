@@ -226,7 +226,7 @@ public class LinkedListDequeTest {
         assertEquals(0, LinkedListDeque.removeFirst().longValue());
         LinkedListDeque.addLast(2);
         LinkedListDeque.addLast(3);
-        LinkedListDeque.addLast(4);
+        LinkedListDeque.addLast(5);
         assertEquals(false, LinkedListDeque.isEmpty());
         assertEquals(3, LinkedListDeque.size());
     }

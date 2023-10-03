@@ -88,7 +88,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return items[firstIndex];
     }
 
-    /** Deletes item from front of the list and
+    /** Deletes item from the front of the list and
      * returns deleted item. */
     @Override
     public T removeFirst() {

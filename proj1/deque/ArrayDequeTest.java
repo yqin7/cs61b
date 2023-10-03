@@ -247,7 +247,7 @@ public class ArrayDequeTest {
         ArrayDeque.isEmpty();
         ArrayDeque.isEmpty();
         ArrayDeque.isEmpty();
-        ArrayDeque.addLast(6);
+        ArrayDeque.addLast(7);
     }
 }
 
