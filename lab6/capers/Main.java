@@ -1,7 +1,7 @@
 package capers;
 
 import java.io.File;
-import java.util.Arrays;
+
 
 import static capers.Utils.*;
 
@@ -62,8 +62,8 @@ public class Main {
         case "birthday":
             validateNumArgs("birthday", args, 2);
             // TODO: celebrate this dog's birthday
-            name = args[1];
-            CapersRepository.celebrateBirthday(name);
+            String bdName = args[1];
+            CapersRepository.celebrateBirthday(bdName);
             break;
         default:
             exitWithError(String.format("Unknown command: %s", args[0]));

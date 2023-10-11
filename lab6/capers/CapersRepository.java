@@ -79,6 +79,7 @@ public class CapersRepository {
         // TODO
         Dog birthdayDog = Dog.fromFile(name);
         birthdayDog.haveBirthday();
+        birthdayDog.saveDog();  /* renew dog and then save dog file */
 
 
     }

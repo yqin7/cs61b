@@ -1,8 +1,6 @@
 package capers;
-
 import java.io.File;
 import java.io.Serializable;
-import java.nio.file.Files;
 
 import static capers.Utils.*;
 
@@ -43,8 +41,7 @@ public class Dog implements Serializable{ // TODO
      */
     public static Dog fromFile(String name) {
         // TODO (hint: look at the Utils file)
-        File dogFile = Utils.join(DOG_FOLDER, name);
-        System.out.println(dogFile);
+        File dogFile = Utils.join(DOG_FOLDER, name); /* C:\Users\huo00\Documents\sp21-s22\lab6\.dogs\name */
         return Utils.readObject(dogFile, Dog.class);
     }
 
