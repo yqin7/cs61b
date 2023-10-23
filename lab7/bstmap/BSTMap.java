@@ -31,7 +31,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         return containsKey(root, key);
     }
 
-    public boolean containsKey(Node node, K key) {
+    private boolean containsKey(Node node, K key) {
         if (node == null) {
             return false;
         }
@@ -69,19 +69,23 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     @Override
     public void put(K key, V value) {
-        put(root, key, value);
+        root = put(root, key, value);
     }
 
-    public void put(Node node, K key, V value) {
+    private Node put(Node node, K key, V value) {
         if (node == null) {
-            node = new Node(key, value);
+            size = size + 1;
+            return new Node(key, value);
         }
         int cmp = key.compareTo(node.key);
         if (cmp > 0) {
-            put(node.right, key, value);
+            node.right = put(node.right, key, value);
         } else if (cmp < 0) {
-            put(node.left, key, value);
+            node.left = put(node.left, key, value);
+        } else {
+            node.value = value; // Update the value if the key already exists
         }
+        return node;
     }
 
     @Override
@@ -89,10 +93,53 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         return null;
     }
 
-    public void printInOrder() {
-
+    public V remove(K key) {
+        return null;
     }
 
+    public V remove(K key, V value) {
+        return null;
+    }
+
+
+    public void printInOrder() {
+        printInOrder(root);
+    }
+
+    private void printInOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        printInOrder(node.left);  // Traverse left subtree
+        System.out.println(node.key + " : " + node.value);  // Print the current node
+        printInOrder(node.right); // Traverse right subtree
+    }
+
+//    public static void main(String[] args) {
+//        BSTMap<String, Integer> bstMap = new BSTMap<>();
+//
+//        // 1. 添加元素
+//        bstMap.put("D", 4);
+//        bstMap.put("B", 2);
+//        bstMap.put("A", 1);
+//        bstMap.put("C", 3);
+//        bstMap.put("F", 6);
+//        bstMap.put("E", 5);
+//        bstMap.put("G", 7);
+//
+//        // 2. 打印整个 BSTMap
+//        System.out.println("Printing BSTMap in order:");
+//        bstMap.printInOrder();
+//
+//        // 3. 使用 `get` 方法检查某些键
+//        System.out.println("\nValue for D: " + bstMap.get("D")); // Should print 4
+//        System.out.println("Value for A: " + bstMap.get("A")); // Should print 1
+//
+//        // 4. 使用 `containsKey` 方法检查某些键
+//        System.out.println("\nContains key B: " + bstMap.containsKey("B")); // Should print true
+//        System.out.println("Contains key Z: " + bstMap.containsKey("Z")); // Should print false
+//    }
 
 
 
