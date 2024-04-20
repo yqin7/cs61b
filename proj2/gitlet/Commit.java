@@ -1,55 +1,60 @@
 package gitlet;
 
-// TODO: any imports you need here
-
 import java.io.Serializable;
-import java.util.Date; // TODO: You'll likely use this in this class
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
-/** Represents a gitlet commit object.
- *  TODO: It's a good idea to give a description here of what else this Class
- *  does at a high level.
- *
- *  @author Ye Qin
- */
 public class Commit implements Serializable {
-    /**
-     * TODO: add instance variables here.
-     *
-     * List all instance variables of the Commit class here with a useful
-     * comment above them describing what that variable represents and how that
-     * variable is used. We've provided one example for `message`.
-     */
-
-    /** The message of this Commit. */
+    private String ownHash;
+    private String parentHash;
     private String message;
-    private Date timestamp;
-    private String parent;
-    private String UID;
+    private String datetime;
+    private HashMap<String, String> blobs; // <fileName, SHA1>
 
-    /* TODO: fill in the rest of this class. */
+    public Commit(String msg, HashMap<String, String> blobMap, String parent) {
+        LocalDateTime current = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        message = msg;
+        datetime = current.format(formatter);
+        blobs = blobMap;
+        parentHash = parent;
+        ownHash = calcHash();
+        SerializeUtils.writeStringToFile(globalLog(), ".gitlet/global-log/gl.txt", true);
+    }
 
-    public Commit(String message, String parent) {
-        this.message = message;
-        this.parent = parent;
-        this.UID = Utils.sha1(this.message);
-        if (this.parent == null) {
-            this.timestamp = new Date(0);
-        }
+    public String calcHash() {
+        byte[] commitObj = SerializeUtils.toByteArray(this);
+        return Utils.sha1(commitObj);
+    }
+
+    public String getOwnHash() {
+        return ownHash;
+    }
+
+    public String getParentHash() {
+        return parentHash;
     }
 
     public String getMessage() {
-        return this.message;
+        return message;
     }
 
-    public Date getTimestamp() {
-        return this.timestamp;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public String getParent() {
-        return this.parent;
+    public HashMap<String, String> getBlobs() {
+        return blobs;
     }
 
-    public String getUID() {
-        return this.UID;
+    public String globalLog() {
+        String firstLine = "===\n";
+        String secondLine = "Commit " + ownHash + "\n";
+        String thirdLine = datetime + "\n";
+        String fourthLine = message + "\n";
+        String fifthLine = "\n";
+        String allLines = firstLine + secondLine + thirdLine + fourthLine + fifthLine;
+        return allLines;
     }
 }
